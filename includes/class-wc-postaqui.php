@@ -22,7 +22,7 @@ function woocommerce_postaqui_init(){
 					'shipping-zones',
 					'instance-settings',
 					);	
-				$this->init();				
+				$this->init();  				
 			}
 
 			public function init(){
