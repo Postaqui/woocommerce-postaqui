@@ -102,9 +102,9 @@ function woocommerce_postaqui_init(){
 
 				$received_rates = $Postaqui->getRates();
 
-				if (isset($received_rates['error'])){
+				if (isset($received_rates->error)){
 					echo "<pre>";
-					echo "<p>".$received_rates['message']."</p>";
+					print_r($received_rates->message);
 					echo "</pre>";
 					return;
 				}
@@ -196,26 +196,33 @@ function woocommerce_postaqui_init(){
 
 				echo "
 				<style>
-					.as-row:before,.as-row:after{display: table; content: ' ';}
-					.as-row:after{clear:both;}
-					.as-col-xs-12, .as-col-sm-4, .as-col-sm-8,.as-col-md-9,.as-col-md-3{position: relative;min-height: 1px;padding-right: 15px;padding-left: 15px;}
+					.as-row{margin:0px -15px;}
+					.as-row::before,.as-row::after{display: table; content: ' ';}
+					.as-row::after{clear:both;}
+					.as-col-xs-12, .as-col-sm-4, .as-col-sm-8,.as-col-md-9,.as-col-md-3, as-col-sm-12, as-col-md-12{position: relative;min-height: 1px;padding-right: 15px;padding-left: 15px;}
 					.as-col-xs-12{float:left;width:100%;}
-					@media (min-width:600px){.as-col-sm-4,.as-col-sm-8{float:left;}.as-col-sm-4{width:33.33%;}.as-col-sm-8{width:66.33%;}}
-					@media (min-width:992px){.as-col-md-3,.as-col-md-9{float:left;}.as-col-md-3{width:25%;}.as-col-md-9{width:75%}}
-					.postaqui_shipping_forecast_form{margin-top:20px;}					
-					.postaqui_shipping_forecast_table{margin:20px 0px;}
+					@media (min-width:600px) {.as-col-sm-4,.as-col-sm-8,as-col-sm-12{float:left;}.as-col-sm-4{width:33.33%;}.as-col-sm-8{width:66.33%;}.as-col-sm-12{width:100%;}}
+					@media (min-width:992px){.as-col-md-3,.as-col-md-9,.as-col-md-12{float:left;}.as-col-md-3{width:25%;}.as-col-md-9{width:75%};as-col-md-12{width:100%;}}
+					.postaqui_shipping_forecast_form{padding-top:20px;}					
+					.postaqui_shipping_forecast_form input{max-width:100% !important;text-align:center;height:42px;}					
+					.postaqui_shipping_forecast_table{padding:20px 0px;}
+					.postaqui_shipping_forecast_table table{width:100%;}					
+					.woocommerce div.product form.cart div.quantity, .woocommerce div.product form.cart .button{top:auto;}
 				</style>
-				<div class='postaqui_shipping_forecast_form'>
-					<form method='post' action='{$product_link}' id='postaqui_shipping_forecast'>	
-						<div class='as-row'>				
-							<div class='as-col-md-3 as-col-sm-4 as-col-xs-12'>
-								<input type='text' value='{$target_zip_code}' class='as_mask_zip_code' name='postaqui_forecast_zip_code'/>
+				<div style='clear:both;'></div>
+				<div class='postaqui_shipping_forecast_form as-row'>
+					<div class=''>
+						<form method='post' action='{$product_link}' id='postaqui_shipping_forecast'>	
+							<div class=''>				
+								<div class='as-col-md-3 as-col-sm-4 as-col-xs-12'>
+									<input type='text' value='{$target_zip_code}' class='as_mask_zip_code' name='postaqui_forecast_zip_code'/>
+								</div>
+								<div class='as-col-md-9 as-col-sm-8 as-col-xs-12'>
+									<button type='submit' id='postaqui_shipping_forecast_submit' class='single_add_to_cart_button button alt'>Simular frete</button>
+								</div>
 							</div>
-							<div class='as-col-md-3 as-col-sm-4 as-col-xs-12'>
-								<button type='submit' id='postaqui_shipping_forecast_submit' class='single_add_to_cart_button button alt'>Simular frete</button>
-							</div>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>";
 
 
@@ -240,9 +247,9 @@ function woocommerce_postaqui_init(){
 				// $teste = [$token,$weight,$source_zip_code,$target_zip_code,$price,$width,$height,$length];
 				$received_rates = $Postaqui->getRates();
 			
-				if (isset($received_rates['error'])){
+				if (isset($received_rates->error)){
 					echo "<pre>";
-					echo "<p>".$received_rates['message']."</p>";
+					echo "<p>".$received_rates->message."</p>";
 					echo "</pre>";
 					return;
 				}				
@@ -272,26 +279,28 @@ function woocommerce_postaqui_init(){
 
 				echo "
 				<div class='postaqui_shipping_forecast_table as-row'>
-					<table>
-						<thead>
-							<tr>
-								<th>Modalidade de envio pelo Postaqui</th>
-								<th>Custo estimado</th>
-							</tr>
-						</thead>
-						<tbody>";
+					<div class='as-col-xs-12 as-col-sm-12 as-col-md-12'>
+						<table>
+							<thead>
+								<tr>
+									<th>Modalidade de envio pelo Postaqui</th>
+									<th>Custo estimado</th>
+								</tr>
+							</thead>
+							<tbody>";
 
-							foreach($rates as $rate){
+								foreach($rates as $rate){
 
-								echo "<tr>";
-								echo "<td>" . $rate['label'] . "</td>";
-								echo "<td>" . $rate['cost'] . "</td>";
-								echo "</tr>";
-							}
+									echo "<tr>";
+									echo "<td>" . $rate['label'] . "</td>";
+									echo "<td>" . $rate['cost'] . "</td>";
+									echo "</tr>";
+								}
 
-							echo "
-						</tbody>
-					</table>
+								echo "
+							</tbody>
+						</table>
+					</div>
 				</div>
 				";
 

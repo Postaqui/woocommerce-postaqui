@@ -81,7 +81,7 @@ class Postaqui{
 		
 		if ($return != []){
             if (is_array($return) && isset($return['error'])){
-                $this->rates = $return;            
+                $this->rates = (object)$return;            
             } else {
                 $this->rates = $return->data;    
             }			
