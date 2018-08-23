@@ -44,18 +44,20 @@ class Postaqui{
 
 		$return = curl_exec($process);
 
-		$status = curl_getinfo($process,CURLINFO_HTTP_CODE);		
-        
-		if ($status > 400){            
-                curl_close($process);   
-                throw new Exception('Falha no acionamento do postaqui. Status '.$status. " . Curl error: ".curl_error($process) . ". Request : ".$params_fmt);
-                return [];                            
+		$status = curl_getinfo($process,CURLINFO_HTTP_CODE);
+
+        if ($status==0) return ['error'=>1, 'message' => 'Não foi possível conectar-se com o Postaqui. Tente novamente mais tarde'];
+
+		if ($status > 400){
+                if ($status==401) return ['error'=>401, 'message' => 'Acesso não autorizado. Verifique se o seu token foi preenchido corretamente ou fale com a Postaqui'];
+                $message = curl_error($process);
+                curl_close($process);                   
+                return ['error'=>$status, 'message' => $message];                            
         }
 
         $return_decode = json_decode($return);
-        if (isset($return_decode->data->error)){
-            throw new Exception('Falha no acionamento do postaqui. '.$return_decode->data->message);
-            return [];                            
+        if (isset($return_decode->data->error)){            
+            return ['error'=>$return_decode->data->error, 'message'=>$return_decode->data->message];                            
         }
 
 		curl_close($process);	
@@ -78,7 +80,11 @@ class Postaqui{
 		$this->rates = [];
 		
 		if ($return != []){
-			$this->rates = $return->data;
+            if (is_array($return) && isset($return['error'])){
+                $this->rates = (object)$return;            
+            } else {
+                $this->rates = $return->data;    
+            }			
 		}
 
 		return;

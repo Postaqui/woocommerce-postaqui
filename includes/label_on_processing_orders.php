@@ -126,7 +126,7 @@ function postaqui_order_processing($order_id){
 	
    	$Postaqui = new Postaqui($token);   	
    	$return = $Postaqui->send_labels($label_data);
-   	
+   	if (isset($return['error'])){ $order->add_order_note($return['message']); return;}
    	$order->add_order_note($return->data->message);
 }
  ?>
