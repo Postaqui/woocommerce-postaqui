@@ -94,7 +94,7 @@ class Postaqui{
     public function send_labels($label_data){
 
         $return = $this->call_curl('POST','tickets',$label_data);
-        return $return;
+        return (object)$return;
     }
 
 	private function arrayToParams($array, $prefix = null){
