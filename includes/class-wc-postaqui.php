@@ -22,7 +22,7 @@ function woocommerce_postaqui_init(){
 					'shipping-zones',
 					'instance-settings',
 					);	
-				$this->init();				
+				$this->init();  				
 			}
 
 			public function init(){
@@ -61,7 +61,7 @@ function woocommerce_postaqui_init(){
 				'description' => 'Informe se devemos mostrar o prazo de entrega'
 				],	
 				'show_estimate_on_product_page' => [
-				'title' => __('Simular frete na página do produto','woocommerce_postaqui'),
+				'title' => __('Calcular frete na página do produto','woocommerce_postaqui'),
 				'type' => 'checkbox',
 				'label' => 'Frete na página do produto',
 				'default' => 'yes',
@@ -218,7 +218,7 @@ function woocommerce_postaqui_init(){
 									<input type='text' value='{$target_zip_code}' class='as_mask_zip_code' name='postaqui_forecast_zip_code'/>
 								</div>
 								<div class='as-col-md-9 as-col-sm-8 as-col-xs-12'>
-									<button type='submit' id='postaqui_shipping_forecast_submit' class='single_add_to_cart_button button alt'>Simular frete</button>
+									<button type='submit' id='postaqui_shipping_forecast_submit' class='single_add_to_cart_button button alt'>Calcular frete</button>
 								</div>
 							</div>
 						</form>
@@ -410,7 +410,7 @@ function postaqui_shipping_forecast_on_product_page(){
 	$postaqui_class->forecast_shipping();
 	
 }
-add_action('woocommerce_after_add_to_cart_form','postaqui_shipping_forecast_on_product_page');
+add_action('woocommerce_after_add_to_cart_form','postaqui_shipping_forecast_on_product_page',50);
 
 function postaqui_get_metodos_de_entrega($cep_destinatario) {
 
