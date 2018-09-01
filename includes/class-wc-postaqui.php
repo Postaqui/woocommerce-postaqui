@@ -135,7 +135,8 @@ function woocommerce_postaqui_init(){
 					$rates = [
 					'id' => 'woocommerce_postaqui_'.$rate->name,
 					'label' => $rate->name.$prazo_texto,
-					'cost' => $rate->price_postaqui,
+					// 'cost' => $rate->price_postaqui,
+					'cost' => $rate->price_finish,
 					'meta_data' => $meta_delivery
 					];	        		
 	        		// echo "<pre>";
@@ -268,7 +269,8 @@ function woocommerce_postaqui_init(){
 					if ( 'yes' === $show_delivery_time ) $prazo_texto = " (".$rate->deadline.")";
 
 					$rate_item['label'] = $rate->name . $prazo_texto;
-					$rate_item['cost'] = wc_price($rate->price_postaqui);
+					// $rate_item['cost'] = wc_price($rate->price_postaqui);
+					$rate_item['cost'] = wc_price($rate->price_finish);
 
 					$rates[] = $rate_item;					
 				}				
