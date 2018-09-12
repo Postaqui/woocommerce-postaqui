@@ -90,7 +90,10 @@ function postaqui_order_processing($order_id){
 			'cep' => only_numbers($destinatario_cep),
 			'celular' => only_numbers($destinatario_celular)
 		],
-		'volume' => $volumes
+		'volume' => $volumes,
+		'pedido' => $order->get_order_number(),
+		'origem' => 'woocommerce-postaqui',
+		'email' => $order->get_billing_email()
 	];
 
 	$meta_group = $order->get_meta_data();
@@ -121,8 +124,6 @@ function postaqui_order_processing($order_id){
 		}
 		if (isset($billing_cellphone) && trim($billing_cellphone)!="") $label_data['destinatario']['celular'] = $billing_cellphone;
 	}
-
-
 	
    	$Postaqui = new Postaqui($token);   	
    	$return = $Postaqui->send_labels($label_data);
