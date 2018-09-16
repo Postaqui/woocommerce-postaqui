@@ -7,8 +7,11 @@ function postaqui_order_processing($order_id){
 
 	//verificar o método de envio e ver se foi um método do Postaqui
 	$order = wc_get_order( $order_id );
+
 	$shp_main_data = current($order->get_shipping_methods());
-	if ("woocommerce_postaqui" != trim($shp_main_data->get_method_id())) return;
+	
+	// if ("woocommerce_postaqui" != trim($shp_main_data->get_method_id())) return;	
+	if (strpos($shp_main_data->get_method_id(),"woocommerce_postaqui")===false) return;
 
 	//verificar o ID e o tipo de envio
 	$meta_data = [];
