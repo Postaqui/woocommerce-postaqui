@@ -75,7 +75,7 @@ class Postaqui{
 			'largura'	=> $this->width,
 			'comprimento' => $this->length
 		];
-
+        // echo "<pre>";print_r($data);echo "</pre>";die();
 		$return = $this->call_curl('POST','shipping-company/calc-price-deadline',$data);
 		$this->rates = [];
 		
