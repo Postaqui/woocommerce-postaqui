@@ -12,7 +12,7 @@ class Postaqui{
 	protected $rates;
 	protected $package_value;
 
-	private $postaqui_url = "http://postaquilog.com.br:3100/";
+	private $postaqui_url = "http://api.postaquilogistica.com.br:3100/";
 
 	public function __construct($token){
 		$this->token = $token;
