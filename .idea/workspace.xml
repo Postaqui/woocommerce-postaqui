@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29c73dca-49e8-4c0a-bf5b-7b421b234182" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/includes/class_api_postaqui.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/class_api_postaqui.php" afterDir="false" />
-    </list>
+    <list default="true" id="29c73dca-49e8-4c0a-bf5b-7b421b234182" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,16 +94,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550060713039</updated>
-      <workItem from="1550060714212" duration="108000" />
+      <workItem from="1550060714212" duration="404000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108000" />
+    <option name="totallyTimeSpent" value="404000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1600" height="857" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24967825" />
